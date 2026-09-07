@@ -1,129 +1,162 @@
-import { useEffect, useState } from "react";
-import { apiUtils } from "../services/api.js";
+import { Link } from "react-router-dom";
+import {
+  Zap,
+  Search,
+  Users,
+  BarChart3,
+  ShieldCheck,
+  MessageSquare,
+  ArrowRight,
+} from "lucide-react";
+import { Button } from "../components/ui/Button.js";
 
-type ApiStatus = "Checking..." | "✅ Connected" | "❌ Disconnected";
+const FEATURES = [
+  {
+    icon: Search,
+    title: "Smart Job Search",
+    description: "Filter and discover roles that match your skills and goals.",
+  },
+  {
+    icon: Users,
+    title: "Candidate Pipelines",
+    description: "Move applicants through screening, interviews, and offers in one place.",
+  },
+  {
+    icon: MessageSquare,
+    title: "Built-in Messaging",
+    description: "Keep candidate and recruiter conversations organized and in context.",
+  },
+  {
+    icon: BarChart3,
+    title: "Hiring Analytics",
+    description: "Track pipeline health and time-to-hire with clear reporting.",
+  },
+];
 
-export const Home = (): JSX.Element => {
-  const [apiStatus, setApiStatus] = useState<ApiStatus>("Checking...");
-  const [loading, setLoading] = useState(true);
+const STEPS = [
+  { step: "1", title: "Create your profile", description: "Set up a candidate or company profile in minutes." },
+  { step: "2", title: "Post or apply", description: "Recruiters list roles; candidates find and apply to them." },
+  { step: "3", title: "Hire with confidence", description: "Interview, message, and offer — all tracked end-to-end." },
+];
 
-  useEffect(() => {
-    const checkApi = async (): Promise<void> => {
-      try {
-        const response = await apiUtils.get<unknown>("/health");
-        if (response.success) {
-          setApiStatus("✅ Connected");
-        } else {
-          setApiStatus("❌ Disconnected");
-        }
-      } catch {
-        setApiStatus("❌ Disconnected");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    checkApi();
-  }, []);
-
+export function Home(): JSX.Element {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
-      <div className="max-w-2xl mx-auto px-6 py-12 text-center">
-        <div className="mb-12">
-          <h1 className="text-5xl font-bold text-gray-900 mb-4">
-            🚀 HireLynk
-          </h1>
-          <p className="text-xl text-gray-600 mb-2">
-            Modern Recruitment &amp; Applicant Tracking System
-          </p>
-          <p className="text-gray-500">Version 1.0.0 (Foundation)</p>
+    <div className="min-h-screen bg-surface">
+      {/* Top nav */}
+      <header className="border-b border-surface-border bg-white">
+        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
+          <div className="flex items-center gap-2">
+            <span className="flex h-8 w-8 items-center justify-center rounded-md bg-navy-900">
+              <Zap className="h-4 w-4 text-white" />
+            </span>
+            <span className="text-base font-semibold text-navy-900">HireLynk</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Link to="/login">
+              <Button variant="ghost" size="sm">
+                Sign in
+              </Button>
+            </Link>
+            <Link to="/register">
+              <Button size="sm">Get started</Button>
+            </Link>
+          </div>
         </div>
+      </header>
 
-        <div className="bg-white rounded-lg shadow-md p-8 mb-8">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">
-            System Status
-          </h2>
-          <div className="space-y-4">
-            <div className="flex items-center justify-between p-4 bg-gray-50 rounded">
-              <span className="text-gray-700">Frontend</span>
-              <span className="text-green-600 font-semibold">✅ Running</span>
-            </div>
-            <div className="flex items-center justify-between p-4 bg-gray-50 rounded">
-              <span className="text-gray-700">Backend API</span>
-              <span className={`font-semibold ${loading ? "text-yellow-600" : ""}`}>
-                {loading ? "🔄 Checking..." : apiStatus}
+      {/* Hero */}
+      <section className="mx-auto max-w-6xl px-4 py-20 text-center sm:px-6">
+        <h1 className="mx-auto max-w-2xl text-3xl font-semibold text-navy-900 sm:text-4xl">
+          Find your next opportunity. Hire great talent.
+        </h1>
+        <p className="mx-auto mt-4 max-w-xl text-base text-navy-500">
+          HireLynk is a modern recruitment platform that brings candidates and recruiters
+          together with a clean, focused workflow — from application to offer.
+        </p>
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+          <Link to="/register">
+            <Button size="lg">
+              Find jobs
+              <ArrowRight className="h-4 w-4" />
+            </Button>
+          </Link>
+          <Link to="/register">
+            <Button variant="outline" size="lg">
+              Hire talent
+            </Button>
+          </Link>
+        </div>
+      </section>
+
+      {/* Feature cards */}
+      <section className="mx-auto max-w-6xl px-4 pb-20 sm:px-6">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {FEATURES.map((feature) => (
+            <div
+              key={feature.title}
+              className="rounded-lg border border-surface-border bg-surface-card p-5 shadow-card"
+            >
+              <span className="flex h-9 w-9 items-center justify-center rounded-md bg-accent-50 text-accent-600">
+                <feature.icon className="h-4.5 w-4.5" />
               </span>
+              <h3 className="mt-3 text-sm font-semibold text-navy-900">{feature.title}</h3>
+              <p className="mt-1 text-sm text-navy-500">{feature.description}</p>
             </div>
+          ))}
+        </div>
+      </section>
+
+      {/* How it works */}
+      <section className="border-y border-surface-border bg-white py-20">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <h2 className="text-center text-2xl font-semibold text-navy-900">How it works</h2>
+          <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-3">
+            {STEPS.map((item) => (
+              <div key={item.step} className="text-center">
+                <span className="mx-auto flex h-9 w-9 items-center justify-center rounded-full bg-navy-900 text-sm font-semibold text-white">
+                  {item.step}
+                </span>
+                <h3 className="mt-3 text-sm font-semibold text-navy-900">{item.title}</h3>
+                <p className="mt-1 text-sm text-navy-500">{item.description}</p>
+              </div>
+            ))}
           </div>
         </div>
+      </section>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <div className="text-3xl mb-2">👥</div>
-            <h3 className="font-semibold text-gray-900 mb-2">For Candidates</h3>
-            <p className="text-sm text-gray-600">
-              Browse jobs, apply, and track your applications
-            </p>
-          </div>
+      {/* Trust / CTA */}
+      <section className="mx-auto max-w-6xl px-4 py-20 text-center sm:px-6">
+        <span className="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-success-50 text-success-600">
+          <ShieldCheck className="h-5 w-5" />
+        </span>
+        <h2 className="mt-4 text-2xl font-semibold text-navy-900">
+          Built for a focused, transparent hiring process
+        </h2>
+        <p className="mx-auto mt-2 max-w-xl text-sm text-navy-500">
+          Every application, interview, and offer is tracked in one place — no spreadsheets,
+          no lost email threads.
+        </p>
+        <div className="mt-6">
+          <Link to="/register">
+            <Button size="lg">Create your free account</Button>
+          </Link>
+        </div>
+      </section>
 
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <div className="text-3xl mb-2">💼</div>
-            <h3 className="font-semibold text-gray-900 mb-2">For Recruiters</h3>
-            <p className="text-sm text-gray-600">
-              Post jobs, manage applications, and hire talent
-            </p>
-          </div>
-
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <div className="text-3xl mb-2">⚙️</div>
-            <h3 className="font-semibold text-gray-900 mb-2">For Admins</h3>
-            <p className="text-sm text-gray-600">
-              Monitor platform, manage users, and view analytics
-            </p>
+      {/* Footer */}
+      <footer className="border-t border-surface-border bg-white py-8">
+        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-4 text-sm text-navy-400 sm:flex-row sm:px-6">
+          <span>© {new Date().getFullYear()} HireLynk. All rights reserved.</span>
+          <div className="flex items-center gap-4">
+            <Link to="/login" className="hover:text-navy-600">
+              Sign in
+            </Link>
+            <Link to="/register" className="hover:text-navy-600">
+              Register
+            </Link>
           </div>
         </div>
-
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8">
-          <h3 className="font-semibold text-blue-900 mb-2">Phase 1: Foundation</h3>
-          <p className="text-sm text-blue-800 mb-3">
-            This is the foundation phase. Core infrastructure is ready:
-          </p>
-          <ul className="text-sm text-blue-800 text-left space-y-1 mb-3">
-            <li>✅ Frontend setup (React + Vite + Tailwind)</li>
-            <li>✅ Backend setup (Express + TypeScript)</li>
-            <li>✅ API client configuration</li>
-            <li>✅ Error handling &amp; logging</li>
-            <li>✅ Security (CORS, Helmet, Rate limiting)</li>
-            <li>✅ Health check endpoint</li>
-          </ul>
-          <p className="text-xs text-blue-700 italic">
-            Phase 2 will add authentication, database, and core features
-          </p>
-        </div>
-
-        <div className="mt-12 space-y-4">
-          <p className="text-sm text-gray-600">API Endpoints:</p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <a
-              href="http://localhost:5000/api/health"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-600 hover:text-blue-800 underline"
-            >
-              GET /api/health
-            </a>
-            <span className="text-gray-400">•</span>
-            <a
-              href="http://localhost:5000/api"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-600 hover:text-blue-800 underline"
-            >
-              GET /api
-            </a>
-          </div>
-        </div>
-      </div>
+      </footer>
     </div>
   );
-};
+}
