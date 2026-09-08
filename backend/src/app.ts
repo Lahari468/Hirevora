@@ -2,12 +2,17 @@ import express, { Request, Response } from "express";
 import cors from "cors";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
+import path from "path";
+import { fileURLToPath } from "url";
 import { env } from "./config/env.js";
 import { CONSTANTS } from "./config/constants.js";
 import { requestLogger } from "./middleware/requestLogger.js";
 import { errorHandler } from "./middleware/errorHandler.js";
 import { sendError } from "./utils/response.js";
 import routes from "./routes/index.js";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 /**
  * Create and configure Express application
@@ -45,6 +50,8 @@ export const createApp = (): express.Application => {
   app.use(express.urlencoded({ limit: "10mb", extended: true }));
 
   app.use(requestLogger);
+
+ app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 
   app.use("/api", routes);
 

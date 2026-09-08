@@ -3,13 +3,14 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Link, useNavigate } from "react-router-dom";
-import { Eye, EyeOff, Zap } from "lucide-react";
+import { Eye, EyeOff } from "lucide-react";
 import { Input } from "../../components/ui/Input.js";
 import { Select } from "../../components/ui/Select.js";
 import { Button } from "../../components/ui/Button.js";
 import { useAuth } from "../../context/AuthContext.js";
 import { ROLE_HOME_PATH } from "../../navigation/navConfig.js";
 import type { ApiResponse } from "../../types/index.js";
+import { HireLynkLogo } from "../../components/brand/HireLynkLogo.js";
 
 const passwordSchema = z
   .string()
@@ -89,9 +90,7 @@ export function Register(): JSX.Element {
     <div className="flex min-h-screen items-center justify-center bg-surface px-4 py-12">
       <div className="w-full max-w-sm">
         <div className="mb-8 flex flex-col items-center gap-2">
-          <span className="flex h-10 w-10 items-center justify-center rounded-md bg-navy-900">
-            <Zap className="h-5 w-5 text-white" />
-          </span>
+          <HireLynkLogo variant="mark" />
           <span className="text-lg font-semibold text-navy-900">HireLynk</span>
         </div>
 

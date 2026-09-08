@@ -1,9 +1,10 @@
 import { NavLink } from "react-router-dom";
-import { LogOut, Zap, X, type LucideIcon } from "lucide-react";
+import { LogOut, X, type LucideIcon } from "lucide-react";
 import { cn } from "../../lib/cn.js";
 import { NAV_BY_ROLE, SECONDARY_NAV_BY_ROLE } from "../../navigation/navConfig.js";
 import type { UserRole } from "../../types/index.js";
 import { useAuth } from "../../context/AuthContext.js";
+import { HireLynkLogo } from "../brand/HireLynkLogo.js";
 
 interface SidebarProps {
   role: UserRole;
@@ -25,7 +26,6 @@ function NavLinkItem({
   return (
     <NavLink
       to={path}
-      end={path.split("/").length <= 2}
       onClick={onClick}
       className={({ isActive }) =>
         cn(
@@ -44,18 +44,13 @@ function NavLinkItem({
 
 export function Sidebar({ role, isMobileOpen, onCloseMobile }: SidebarProps): JSX.Element {
   const { logout } = useAuth();
-  const primaryItems = NAV_BY_ROLE[role];
+  const sections = NAV_BY_ROLE[role];
   const secondaryItems = SECONDARY_NAV_BY_ROLE[role];
 
   const content = (
     <div className="flex h-full flex-col bg-navy-900 text-white">
       <div className="flex items-center justify-between px-4 py-4">
-        <div className="flex items-center gap-2">
-          <span className="flex h-8 w-8 items-center justify-center rounded-md bg-accent-600">
-            <Zap className="h-4 w-4 text-white" />
-          </span>
-          <span className="text-base font-semibold tracking-tight">HireLynk</span>
-        </div>
+        <HireLynkLogo variant="full" tone="reversed" />
         <button
           type="button"
           onClick={onCloseMobile}
@@ -66,15 +61,24 @@ export function Sidebar({ role, isMobileOpen, onCloseMobile }: SidebarProps): JS
         </button>
       </div>
 
-      <nav className="flex-1 space-y-1 overflow-y-auto px-3 py-2">
-        {primaryItems.map((item) => (
-          <NavLinkItem
-            key={item.path}
-            path={item.path}
-            label={item.label}
-            Icon={item.icon}
-            onClick={onCloseMobile}
-          />
+      <nav className="flex-1 space-y-5 overflow-y-auto px-3 py-2">
+        {sections.map((section, idx) => (
+          <div key={section.label ?? idx} className="space-y-1">
+            {section.label && (
+              <p className="px-3 pb-1 text-[11px] font-semibold uppercase tracking-wider text-navy-400">
+                {section.label}
+              </p>
+            )}
+            {section.items.map((item) => (
+              <NavLinkItem
+                key={item.path}
+                path={item.path}
+                label={item.label}
+                Icon={item.icon}
+                onClick={onCloseMobile}
+              />
+            ))}
+          </div>
         ))}
       </nav>
 

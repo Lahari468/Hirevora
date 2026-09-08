@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import {
-  Zap,
   Search,
   Users,
   BarChart3,
@@ -9,6 +8,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { Button } from "../components/ui/Button.js";
+import { HireLynkLogo } from "../components/brand/HireLynkLogo.js";
 
 const FEATURES = [
   {
@@ -45,12 +45,7 @@ export function Home(): JSX.Element {
       {/* Top nav */}
       <header className="border-b border-surface-border bg-white">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
-          <div className="flex items-center gap-2">
-            <span className="flex h-8 w-8 items-center justify-center rounded-md bg-navy-900">
-              <Zap className="h-4 w-4 text-white" />
-            </span>
-            <span className="text-base font-semibold text-navy-900">HireLynk</span>
-          </div>
+          <HireLynkLogo variant="full" />
           <div className="flex items-center gap-2">
             <Link to="/login">
               <Button variant="ghost" size="sm">
