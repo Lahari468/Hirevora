@@ -8,7 +8,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { Button } from "../components/ui/Button.js";
-import { HireLynkLogo } from "../components/brand/HireLynkLogo.js";
+import HireVoraLogo from "../components/brand/HireLynkLogo.js";
 
 const FEATURES = [
   {
@@ -45,7 +45,7 @@ export function Home(): JSX.Element {
       {/* Top nav */}
       <header className="border-b border-surface-border bg-white">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
-          <HireLynkLogo variant="full" />
+          <HireVoraLogo variant="full" />
           <div className="flex items-center gap-2">
             <Link to="/login">
               <Button variant="ghost" size="sm">
@@ -65,7 +65,7 @@ export function Home(): JSX.Element {
           Find your next opportunity. Hire great talent.
         </h1>
         <p className="mx-auto mt-4 max-w-xl text-base text-navy-500">
-          HireLynk is a modern recruitment platform that brings candidates and recruiters
+          HireVora is a modern recruitment platform that brings candidates and recruiters
           together with a clean, focused workflow — from application to offer.
         </p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
@@ -141,7 +141,7 @@ export function Home(): JSX.Element {
       {/* Footer */}
       <footer className="border-t border-surface-border bg-white py-8">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-4 text-sm text-navy-400 sm:flex-row sm:px-6">
-          <span>© {new Date().getFullYear()} HireLynk. All rights reserved.</span>
+          <span>© {new Date().getFullYear()} HireVora. All rights reserved.</span>
           <div className="flex items-center gap-4">
             <Link to="/login" className="hover:text-navy-600">
               Sign in

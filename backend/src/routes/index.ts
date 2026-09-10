@@ -22,11 +22,11 @@ import adminReportRoutes from "./adminReportRoutes.js";
 const router = Router();
 
 router.get("/health", (_req: Request, res: Response): void => {
-  ok(res, "HireLynk API is running");
+  ok(res, "HireVora API is running");
 });
 
 router.get("/", (_req: Request, res: Response): void => {
-  ok(res, "Welcome to HireLynk API", {
+  ok(res, "Welcome to HireVora API", {
     version: "1.0.0",
     status: "running",
   });

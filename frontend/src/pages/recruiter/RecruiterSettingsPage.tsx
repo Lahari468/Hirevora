@@ -55,7 +55,7 @@ export function RecruiterSettingsPage(): JSX.Element {
         </Card>
 
         <Card>
-          <CardHeader title="Log out" subtitle="Sign out of your HireLynk account on this device." />
+          <CardHeader title="Log out" subtitle="Sign out of your HireVora account on this device." />
           <CardContent>
             <Button variant="outline" onClick={() => void logout()}>
               <LogOut className="h-4 w-4" />

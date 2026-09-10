@@ -1,6 +1,6 @@
 import { cn } from "../../lib/cn.js";
 
-export interface HireLynkLogoProps {
+export interface HireVoraLogoProps {
   /** "full" = mark + wordmark, "mark" = icon only, "compact" = smaller icon for tight spaces (mobile topbar). */
   variant?: "full" | "mark" | "compact";
   /** "color" for light backgrounds (navy + accent), "reversed" for dark surfaces (white + accent), "mono" for a single flat color (e.g. printed materials). */
@@ -30,7 +30,7 @@ function Mark({ size, tone }: { size: number; tone: "color" | "reversed" | "mono
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       role="img"
-      aria-label="HireLynk"
+      aria-label="HireVora"
     >
       {/* Panel A — candidate */}
       <rect x="5" y="5" width="20" height="20" rx="5" fill={panelColor} opacity={panelOpacity} />
@@ -42,11 +42,11 @@ function Mark({ size, tone }: { size: number; tone: "color" | "reversed" | "mono
   );
 }
 
-export function HireLynkLogo({
+export function HireVoraLogo({
   variant = "full",
   tone = "color",
   className,
-}: HireLynkLogoProps): JSX.Element {
+}: HireVoraLogoProps): JSX.Element {
   const size = variant === "compact" ? 24 : 32;
   const textColor = tone === "reversed" ? "text-white" : "text-navy-900";
 
@@ -61,7 +61,9 @@ export function HireLynkLogo({
   return (
     <span className={cn("inline-flex items-center gap-2", className)}>
       <Mark size={size} tone={tone} />
-      <span className={cn("text-base font-semibold tracking-tight", textColor)}>HireLynk</span>
+      <span className={cn("text-base font-semibold tracking-tight", textColor)}>HireVora</span>
     </span>
   );
 }
+
+export default HireVoraLogo;

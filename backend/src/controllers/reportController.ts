@@ -9,7 +9,7 @@ import { created, ok } from "../utils/response.js";
 
 /**
  * POST /api/reports
- * Submit a report against a legitimate HireLynk entity. The reporter's
+ * Submit a report against a legitimate HireVora entity. The reporter's
  * identity always comes from the authenticated JWT, never the request body.
  */
 export const createReport: AsyncController = async (req, res) => {

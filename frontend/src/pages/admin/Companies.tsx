@@ -36,7 +36,7 @@ export function Companies(): JSX.Element {
 
   return (
     <AppShell title="Companies">
-      <PageHeader title="Companies" description="Companies registered on HireLynk." />
+      <PageHeader title="Companies" description="Companies registered on HireVora." />
 
       <form
         onSubmit={handleSearchSubmit}

@@ -5,7 +5,7 @@ import { asyncHandler } from "../middleware/errorHandler.js";
 
 const router = Router();
 
-// POST /api/reports - submit a report against a legitimate HireLynk entity
+// POST /api/reports - submit a report against a legitimate HireVora entity
 router.post("/", authenticate, asyncHandler(reportController.createReport));
 
 // GET /api/reports - list the authenticated user's own reports

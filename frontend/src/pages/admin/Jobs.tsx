@@ -61,7 +61,7 @@ export function Jobs(): JSX.Element {
 
   return (
     <AppShell title="Jobs">
-      <PageHeader title="Jobs" description="Every job posted across HireLynk." />
+      <PageHeader title="Jobs" description="Every job posted across HireVora." />
 
       <form
         onSubmit={handleSearchSubmit}

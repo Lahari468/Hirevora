@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 const prisma = new PrismaClient();
 
 // Demo password for local development only
-const DEMO_PASSWORD = "HireLynkDemo123!";
+const DEMO_PASSWORD = "HireVoraDemo123!";
 const DEMO_PASSWORD_SALT_ROUNDS = 12;
 
 async function generatePasswordHash(password: string): Promise<string> {
@@ -44,7 +44,7 @@ async function main(): Promise<void> {
   const _admin = await prisma.user.create({
     data: {
       name: "Admin User",
-      email: "admin@hirelynk.demo",
+      email: "admin@hirevora.demo",
       passwordHash: passwordHash,
       role: "ADMIN",
       isActive: true,
@@ -55,7 +55,7 @@ async function main(): Promise<void> {
   const recruiter1 = await prisma.user.create({
     data: {
       name: "Sarah Johnson",
-      email: "recruiter1@hirelynk.demo",
+      email: "recruiter1@hirevora.demo",
       passwordHash: passwordHash,
       role: "RECRUITER",
       isActive: true,
@@ -65,7 +65,7 @@ async function main(): Promise<void> {
   const recruiter2 = await prisma.user.create({
     data: {
       name: "Michael Chen",
-      email: "recruiter2@hirelynk.demo",
+      email: "recruiter2@hirevora.demo",
       passwordHash: passwordHash,
       role: "RECRUITER",
       isActive: true,
@@ -76,7 +76,7 @@ async function main(): Promise<void> {
   const candidate1 = await prisma.user.create({
     data: {
       name: "Alice Williams",
-      email: "candidate1@hirelynk.demo",
+      email: "candidate1@hirevora.demo",
       passwordHash: passwordHash,
       role: "CANDIDATE",
       isActive: true,
@@ -86,7 +86,7 @@ async function main(): Promise<void> {
   const candidate2 = await prisma.user.create({
     data: {
       name: "Bob Martinez",
-      email: "candidate2@hirelynk.demo",
+      email: "candidate2@hirevora.demo",
       passwordHash: passwordHash,
       role: "CANDIDATE",
       isActive: true,
@@ -96,7 +96,7 @@ async function main(): Promise<void> {
   const candidate3 = await prisma.user.create({
     data: {
       name: "Carol Davis",
-      email: "candidate3@hirelynk.demo",
+      email: "candidate3@hirevora.demo",
       passwordHash: passwordHash,
       role: "CANDIDATE",
       isActive: true,
@@ -106,7 +106,7 @@ async function main(): Promise<void> {
   const candidate4 = await prisma.user.create({
     data: {
       name: "David Lee",
-      email: "candidate4@hirelynk.demo",
+      email: "candidate4@hirevora.demo",
       passwordHash: passwordHash,
       role: "CANDIDATE",
       isActive: true,
@@ -116,7 +116,7 @@ async function main(): Promise<void> {
   const candidate5 = await prisma.user.create({
     data: {
       name: "Emma Wilson",
-      email: "candidate5@hirelynk.demo",
+      email: "candidate5@hirevora.demo",
       passwordHash: passwordHash,
       role: "CANDIDATE",
       isActive: true,
@@ -428,7 +428,7 @@ async function main(): Promise<void> {
       candidateId: profile1.id,
       fileName: "Alice_Williams_Resume.pdf",
       fileUrl: "https://cloudinary.demo/alice_resume",
-      cloudinaryPublicId: "hirelynk/alice_resume",
+      cloudinaryPublicId: "hirevora/alice_resume",
     },
   });
 
@@ -437,7 +437,7 @@ async function main(): Promise<void> {
       candidateId: profile2.id,
       fileName: "Bob_Martinez_Resume.pdf",
       fileUrl: "https://cloudinary.demo/bob_resume",
-      cloudinaryPublicId: "hirelynk/bob_resume",
+      cloudinaryPublicId: "hirevora/bob_resume",
     },
   });
 
@@ -446,7 +446,7 @@ async function main(): Promise<void> {
       candidateId: profile3.id,
       fileName: "Carol_Davis_Resume.pdf",
       fileUrl: "https://cloudinary.demo/carol_resume",
-      cloudinaryPublicId: "hirelynk/carol_resume",
+      cloudinaryPublicId: "hirevora/carol_resume",
     },
   });
 
@@ -728,8 +728,8 @@ async function main(): Promise<void> {
   console.log(`   - 4 Audit Logs`);
   console.log(`\n🔐 DEMO CREDENTIALS:`);
   console.log(`   All demo accounts use password: ${DEMO_PASSWORD}`);
-  console.log(`   Email format: role@hirelynk.demo`);
-  console.log(`   Examples: admin@hirelynk.demo, recruiter1@hirelynk.demo, candidate1@hirelynk.demo`);
+  console.log(`   Email format: role@hirevora.demo`);
+  console.log(`   Examples: admin@hirevora.demo, recruiter1@hirevora.demo, candidate1@hirevora.demo`);
   console.log(`\n⚠️  IMPORTANT: This is for LOCAL DEVELOPMENT ONLY`);
   console.log(`   - Demo password is NOT for production`);
   console.log(`   - All demo data is sample/placeholder data`);

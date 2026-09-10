@@ -7,7 +7,7 @@ const startServer = async (): Promise<void> => {
 
     const server = app.listen(env.PORT, () => {
       console.log(`
-        🚀 HireLynk API Server Started
+        🚀 HireVora API Server Started
         Server: http://localhost:${env.PORT}
         Environment: ${isDevelopment ? "development" : "production"}
         CORS Origin: ${env.FRONTEND_URL}

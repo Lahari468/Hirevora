@@ -101,7 +101,7 @@ export function ResumePage(): JSX.Element {
             <EmptyState
               icon={<FileText className="h-5 w-5" />}
               title="No resumes uploaded"
-              description="Upload a resume to start applying to jobs on HireLynk."
+              description="Upload a resume to start applying to jobs on HireVora."
             />
           ) : (
             <ul className="divide-y divide-surface-border">

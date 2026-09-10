@@ -16,7 +16,7 @@ export function AdminDashboard(): JSX.Element {
     <AppShell title="Dashboard">
       <PageHeader
         title="Admin Dashboard"
-        description="Overview of HireLynk activity and platform health."
+        description="Overview of HireVora activity and platform health."
       />
 
       {error ? (

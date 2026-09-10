@@ -1,7 +1,7 @@
 {
-  "name": "hirelynk-backend",
+  "name": "hirevora-backend",
   "version": "1.0.0",
-  "description": "HireLynk - Applicant Tracking System Backend",
+  "description": "HireVora - Applicant Tracking System Backend",
   "main": "dist/server.js",
   "type": "module",
   "scripts": {
@@ -17,7 +17,7 @@
     "prisma:generate": "prisma generate",
     "prisma:seed": "tsx prisma/seed.ts"
   },
-  "keywords": ["ats", "recruitment", "hirelynk"],
+  "keywords": ["ats", "recruitment", "hirevora"],
   "author": "",
   "license": "ISC",
   "dependencies": {

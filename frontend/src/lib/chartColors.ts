@@ -1,4 +1,4 @@
-/** Hex equivalents of the HireLynk design tokens (tailwind.config.js), for use in recharts fills/strokes. */
+/** Hex equivalents of the HireVora design tokens (tailwind.config.js), for use in recharts fills/strokes. */
 export const CHART_COLORS = {
   navy900: "#111729",
   navy400: "#6b7d99",

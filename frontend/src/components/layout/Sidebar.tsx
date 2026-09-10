@@ -4,7 +4,7 @@ import { cn } from "../../lib/cn.js";
 import { NAV_BY_ROLE, SECONDARY_NAV_BY_ROLE } from "../../navigation/navConfig.js";
 import type { UserRole } from "../../types/index.js";
 import { useAuth } from "../../context/AuthContext.js";
-import { HireLynkLogo } from "../brand/HireLynkLogo.js";
+import HireVoraLogo from "../brand/HireLynkLogo.js";
 
 interface SidebarProps {
   role: UserRole;
@@ -50,7 +50,7 @@ export function Sidebar({ role, isMobileOpen, onCloseMobile }: SidebarProps): JS
   const content = (
     <div className="flex h-full flex-col bg-navy-900 text-white">
       <div className="flex items-center justify-between px-4 py-4">
-        <HireLynkLogo variant="full" tone="reversed" />
+        <HireVoraLogo variant="full" tone="reversed" />
         <button
           type="button"
           onClick={onCloseMobile}

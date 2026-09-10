@@ -65,7 +65,7 @@ export function Users(): JSX.Element {
 
   return (
     <AppShell title="Users">
-      <PageHeader title="Users" description="Everyone with a HireLynk account." />
+      <PageHeader title="Users" description="Everyone with a HireVora account." />
 
       <form
         onSubmit={handleSearchSubmit}

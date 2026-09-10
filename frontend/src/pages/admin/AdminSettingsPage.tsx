@@ -57,7 +57,7 @@ export function AdminSettingsPage(): JSX.Element {
         </Card>
 
         <Card>
-          <CardHeader title="Platform preferences" subtitle="Global HireLynk configuration." />
+          <CardHeader title="Platform preferences" subtitle="Global HireVora configuration." />
           <CardContent>
             <p className="text-sm text-navy-500">
               Platform-level configuration options are coming in a future update.
@@ -66,7 +66,7 @@ export function AdminSettingsPage(): JSX.Element {
         </Card>
 
         <Card>
-          <CardHeader title="Log out" subtitle="Sign out of your HireLynk account on this device." />
+          <CardHeader title="Log out" subtitle="Sign out of your HireVora account on this device." />
           <CardContent>
             <Button variant="outline" onClick={() => void logout()}>
               <LogOut className="h-4 w-4" />
