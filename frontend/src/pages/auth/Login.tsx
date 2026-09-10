@@ -9,7 +9,7 @@ import { Button } from "../../components/ui/Button.js";
 import { useAuth } from "../../context/AuthContext.js";
 import { ROLE_HOME_PATH } from "../../navigation/navConfig.js";
 import type { ApiResponse } from "../../types/index.js";
-import HireVoraLogo from "../../components/brand/HireLynkLogo.js";
+import HireVoraLogo from "../../components/brand/HireVoraLogo";
 
 const loginSchema = z.object({
   email: z.string().email("Enter a valid email address"),

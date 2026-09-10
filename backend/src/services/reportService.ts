@@ -179,7 +179,7 @@ const verifyReportTarget = async (
 };
 
 /**
- * Create a report against a legitimate HireLynk entity. At most one
+ * Create a report against a legitimate HireVora entity. At most one
  * active (PENDING/REVIEWING) report per reporter per target is allowed;
  * a new report may be filed again once a prior one has been resolved or
  * dismissed.

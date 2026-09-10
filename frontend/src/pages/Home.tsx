@@ -8,7 +8,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { Button } from "../components/ui/Button.js";
-import HireVoraLogo from "../components/brand/HireLynkLogo.js";
+import HireVoraLogo from "../components/brand/HireVoraLogo";
 
 const FEATURES = [
   {

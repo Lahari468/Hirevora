@@ -4,7 +4,7 @@ import { cn } from "../../lib/cn.js";
 import { NAV_BY_ROLE, SECONDARY_NAV_BY_ROLE } from "../../navigation/navConfig.js";
 import type { UserRole } from "../../types/index.js";
 import { useAuth } from "../../context/AuthContext.js";
-import HireVoraLogo from "../brand/HireLynkLogo.js";
+import HireVoraLogo from "../brand/HireVoraLogo";
 
 interface SidebarProps {
   role: UserRole;

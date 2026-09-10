@@ -76,14 +76,14 @@ Expected:
 ```json
 {
   "success": true,
-  "message": "HireLynk API is running"
+  "message": "HireVora API is running"
 }
 ```
 
 ### Check Frontend
 
 Open `http://localhost:5173` in browser. Should show:
-- HireLynk title
+- HireVora title
 - Frontend: ✅ Running
 - Backend API: ✅ Connected (if backend is running)
 
