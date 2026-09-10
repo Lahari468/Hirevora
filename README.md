@@ -1,10 +1,10 @@
-# HireLynk - Applicant Tracking System
+# Hirevora - Applicant Tracking System
 
 A modern, production-quality recruitment and Applicant Tracking System (ATS) built with React, Node.js, and PostgreSQL.
 
 ## 📋 Project Overview
 
-HireLynk helps companies manage:
+Hirevora helps companies manage:
 - Job postings
 - Candidate applications
 - Recruitment pipeline
@@ -29,7 +29,7 @@ HireLynk helps companies manage:
 - Prisma (Phase 2)
 
 ## 📁 Project Structure
-hirelynk/
+hirevora/
 ├── backend/ # Express.js API
 ├── frontend/ # React application
 ├── docs/ # Documentation
