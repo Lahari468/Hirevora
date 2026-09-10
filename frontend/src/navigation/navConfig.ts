@@ -15,9 +15,9 @@ import {
   HeartHandshake,
   Building,
   ShieldAlert,
-  ClipboardList,
-  BarChart3,
   ScrollText,
+  Kanban,
+  BarChart3,
   type LucideIcon,
 } from "lucide-react";
 import type { UserRole } from "../types/index.js";
@@ -61,7 +61,10 @@ export const NAV_BY_ROLE: Record<UserRole, NavSection[]> = {
     },
     {
       label: "Other",
-      items: [{ label: "Notifications", path: "/candidate/notifications", icon: Bell }],
+      items: [
+        { label: "Notifications", path: "/candidate/notifications", icon: Bell },
+        { label: "Analytics", path: "/candidate/analytics", icon: BarChart3 },
+      ],
     },
   ],
   RECRUITER: [
@@ -71,6 +74,7 @@ export const NAV_BY_ROLE: Record<UserRole, NavSection[]> = {
         { label: "Dashboard", path: "/recruiter/dashboard", icon: LayoutDashboard },
         { label: "Jobs", path: "/recruiter/jobs", icon: Briefcase },
         { label: "Applications", path: "/recruiter/applications", icon: FileText },
+        { label: "ATS Pipeline", path: "/recruiter/ats", icon: Kanban },
         { label: "Candidates", path: "/recruiter/candidates", icon: Users },
         { label: "Interviews", path: "/recruiter/interviews", icon: CalendarClock },
         { label: "Messages", path: "/recruiter/messages", icon: MessageSquare },
@@ -80,6 +84,7 @@ export const NAV_BY_ROLE: Record<UserRole, NavSection[]> = {
       label: "Recruitment",
       items: [
         { label: "Offers", path: "/recruiter/offers", icon: HeartHandshake },
+        { label: "Analytics", path: "/recruiter/analytics", icon: BarChart3 },
         { label: "Company", path: "/recruiter/company", icon: Building2 },
       ],
     },
@@ -93,16 +98,30 @@ export const NAV_BY_ROLE: Record<UserRole, NavSection[]> = {
   ],
   ADMIN: [
     {
+      label: "Overview",
       items: [
-        { label: "Dashboard", path: "/admin", icon: LayoutDashboard },
-        { label: "Users", path: "/admin/users", icon: Users },
-        { label: "Jobs", path: "/admin/jobs", icon: Briefcase },
-        { label: "Companies", path: "/admin/companies", icon: Building },
-        { label: "Applications", path: "/admin/applications", icon: FileText },
-        { label: "Reports", path: "/admin/reports", icon: ClipboardList },
-        { label: "Moderation", path: "/admin/moderation", icon: ShieldAlert },
+        { label: "Dashboard", path: "/admin/dashboard", icon: LayoutDashboard },
         { label: "Analytics", path: "/admin/analytics", icon: BarChart3 },
+      ],
+    },
+    {
+      label: "Management",
+      items: [
+        { label: "Users", path: "/admin/users", icon: Users },
+        { label: "Companies", path: "/admin/companies", icon: Building },
+        { label: "Jobs", path: "/admin/jobs", icon: Briefcase },
+        { label: "Applications", path: "/admin/applications", icon: FileText },
+      ],
+    },
+    {
+      label: "Moderation",
+      items: [{ label: "Reports", path: "/admin/reports", icon: ShieldAlert }],
+    },
+    {
+      label: "System",
+      items: [
         { label: "Audit Logs", path: "/admin/audit-logs", icon: ScrollText },
+        { label: "Notifications", path: "/admin/notifications", icon: Bell },
       ],
     },
   ],
@@ -117,7 +136,7 @@ export const SECONDARY_NAV_BY_ROLE: Record<UserRole, NavItem[]> = {
 export const ROLE_HOME_PATH: Record<UserRole, string> = {
   CANDIDATE: "/candidate/dashboard",
   RECRUITER: "/recruiter/dashboard",
-  ADMIN: "/admin",
+  ADMIN: "/admin/dashboard",
 };
 
 /** Flat item list per role — used where sections don't matter (e.g. generating "coming soon" routes). */

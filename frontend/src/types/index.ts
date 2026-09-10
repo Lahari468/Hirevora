@@ -581,3 +581,197 @@ export interface CreateOfferPayload {
 }
 
 export type UpdateOfferPayload = Partial<Omit<CreateOfferPayload, "applicationId">>;
+
+/* -------------------------------------------------------------------------- */
+/* Admin — dashboard, users, jobs, companies, audit logs                     */
+/* GET /api/admin/dashboard is served by adminController.getDashboard        */
+/* (adminRoutes is mounted before adminAnalyticsRoutes at the same "/admin"  */
+/* base path, so the richer adminAnalyticsController.getAdminDashboard is    */
+/* never actually reached — this DashboardStats shape is what's live).      */
+/* -------------------------------------------------------------------------- */
+
+export interface AdminDashboardStats {
+  totalUsers: number;
+  candidateCount: number;
+  recruiterCount: number;
+  adminCount: number;
+  totalCompanies: number;
+  totalJobs: number;
+  openJobs: number;
+  draftJobs: number;
+  closedJobs: number;
+  totalApplications: number;
+  applicationsByStatus: Record<string, number>;
+}
+
+export interface AdminUserListItem {
+  id: string;
+  name: string;
+  email: string;
+  role: UserRole;
+  isActive: boolean;
+  createdAt: string;
+}
+
+export interface AdminUserDetails {
+  id: string;
+  name: string;
+  email: string;
+  role: UserRole;
+  isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
+  candidateProfile: { id: string; headline: string | null; location: string | null } | null;
+  recruiterProfile: {
+    id: string;
+    jobTitle: string | null;
+    company: { id: string; name: string } | null;
+  } | null;
+}
+
+export interface AdminUserListFilters {
+  page?: number;
+  limit?: number;
+  search?: string;
+  role?: UserRole;
+  sort?: "newest" | "oldest" | "name";
+}
+
+export interface AdminJobListItem {
+  id: string;
+  title: string;
+  company: JobCompany;
+  recruiter: { id: string; name: string };
+  location: string;
+  status: JobStatus;
+  applicationCount: number;
+  createdAt: string;
+}
+
+export interface AdminJobDetails {
+  id: string;
+  title: string;
+  description: string;
+  location: string;
+  employmentType: EmploymentType;
+  experienceMin: number | null;
+  experienceMax: number | null;
+  salaryMin: number | null;
+  salaryMax: number | null;
+  status: JobStatus;
+  createdAt: string;
+  updatedAt: string;
+  company: Company;
+  recruiter: { id: string; name: string; email: string };
+  _count: { applications: number; skills: number };
+}
+
+export interface AdminJobListFilters {
+  page?: number;
+  limit?: number;
+  search?: string;
+  status?: JobStatus;
+  employmentType?: EmploymentType;
+  sort?: "newest" | "oldest" | "salary_high" | "salary_low";
+}
+
+export interface AdminCompanyListItem {
+  id: string;
+  name: string;
+  location: string | null;
+  createdAt: string;
+}
+
+export interface AdminCompanyListFilters {
+  page?: number;
+  limit?: number;
+  search?: string;
+}
+
+export type AuditAction =
+  | "LOGIN"
+  | "JOB_CREATED"
+  | "JOB_UPDATED"
+  | "JOB_PUBLISHED"
+  | "APPLICATION_CREATED"
+  | "APPLICATION_STATUS_CHANGED"
+  | "INTERVIEW_SCHEDULED"
+  | "USER_SUSPENDED"
+  | "REPORT_CREATED"
+  | "REPORT_REVIEWED"
+  | "REPORT_RESOLVED"
+  | "REPORT_DISMISSED";
+
+export interface AdminAuditLogItem {
+  id: string;
+  user: { id: string; name: string } | null;
+  action: string;
+  entityType: string;
+  entityId: string | null;
+  createdAt: string;
+}
+
+export interface AdminAuditLogListFilters {
+  page?: number;
+  limit?: number;
+  action?: string;
+  entityType?: string;
+  sort?: "newest" | "oldest";
+}
+
+/* -------------------------------------------------------------------------- */
+/* Admin — reports / moderation                                              */
+/* -------------------------------------------------------------------------- */
+
+export type ReportTargetType = "JOB" | "USER" | "APPLICATION" | "MESSAGE" | "FEEDBACK";
+export type ReportReason =
+  | "SPAM"
+  | "FRAUD"
+  | "HARASSMENT"
+  | "INAPPROPRIATE_CONTENT"
+  | "FAKE_JOB"
+  | "MISLEADING_INFORMATION"
+  | "OTHER";
+export type ReportStatus = "PENDING" | "REVIEWING" | "RESOLVED" | "DISMISSED";
+
+/**
+ * Flat shape as actually returned by the backend — reporterId/targetId are
+ * raw UUIDs with no joined name/title. The Report Details page links out to
+ * /admin/users/:id or /admin/jobs/:id (the only two target types with a
+ * real admin detail endpoint) rather than inventing resolved names.
+ */
+export interface AdminReport {
+  id: string;
+  reporterId: string;
+  targetType: ReportTargetType;
+  targetId: string;
+  reason: ReportReason;
+  description: string | null;
+  status: ReportStatus;
+  resolvedBy: string | null;
+  resolutionNote: string | null;
+  resolvedAt: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface AdminReportListFilters {
+  page?: number;
+  limit?: number;
+  status?: ReportStatus;
+  targetType?: ReportTargetType;
+  sort?: "newest" | "oldest";
+}
+
+/** Mirrors backend/src/services/reportService.ts ALLOWED_TRANSITIONS exactly. */
+export const REPORT_STATUS_TRANSITIONS: Record<ReportStatus, ReportStatus[]> = {
+  PENDING: ["REVIEWING", "RESOLVED", "DISMISSED"],
+  REVIEWING: ["RESOLVED", "DISMISSED"],
+  RESOLVED: [],
+  DISMISSED: [],
+};
+
+export interface UpdateReportPayload {
+  status: Extract<ReportStatus, "REVIEWING" | "RESOLVED" | "DISMISSED">;
+  resolutionNote?: string;
+}

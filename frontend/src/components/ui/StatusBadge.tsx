@@ -15,6 +15,12 @@ const STATUS_MAP: Record<string, { label: string; variant: "neutral" | "success"
   PENDING: { label: "Pending", variant: "warning" },
   IN_REVIEW: { label: "In review", variant: "warning" },
   SCHEDULED: { label: "Scheduled", variant: "warning" },
+  // Real ApplicationStatus enum values (backend/prisma/schema.prisma)
+  APPLIED: { label: "Applied", variant: "neutral" },
+  SCREENING: { label: "Screening", variant: "warning" },
+  SHORTLISTED: { label: "Shortlisted", variant: "info" },
+  INTERVIEW: { label: "Interview", variant: "info" },
+  OFFER: { label: "Offer", variant: "accent" },
   DRAFT: { label: "Draft", variant: "neutral" },
   CLOSED: { label: "Closed", variant: "neutral" },
   INACTIVE: { label: "Inactive", variant: "neutral" },
@@ -23,8 +29,6 @@ const STATUS_MAP: Record<string, { label: string; variant: "neutral" | "success"
   DECLINED: { label: "Declined", variant: "danger" },
   CANCELLED: { label: "Cancelled", variant: "danger" },
   FLAGGED: { label: "Flagged", variant: "danger" },
-  INTERVIEWING: { label: "Interviewing", variant: "info" },
-  OFFERED: { label: "Offered", variant: "info" },
 };
 
 export function StatusBadge({ status }: { status: string }): JSX.Element {
