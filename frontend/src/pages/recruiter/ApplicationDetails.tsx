@@ -16,8 +16,10 @@ import { useRecruiterApplicationDetails } from "../../hooks/useRecruiterApplicat
 import { useRecruiterApplicationsIndex } from "../../hooks/useRecruiterApplicationsIndex.js";
 import { applicationService } from "../../services/applicationService.js";
 import { messageService } from "../../services/messageService.js";
+import { resumeService } from "../../services/resumeService.js";
 import { useToast } from "../../context/ToastContext.js";
-import { formatDate, formatDateTime, resolveFileUrl } from "../../lib/format.js";
+import { formatDate, formatDateTime } from "../../lib/format.js";
+import { openAuthenticatedFile } from "../../lib/fileAccess.js";
 import type { ApiResponse, ApplicationStatus } from "../../types/index.js";
 import { APPLICATION_STATUS_TRANSITIONS } from "../../types/index.js";
 
@@ -80,6 +82,14 @@ export function ApplicationDetails(): JSX.Element {
       showToast(isApiResponse(err) ? err.message : "Unable to send message.", "error");
     } finally {
       setIsSendingMessage(false);
+    }
+  };
+
+  const handleOpenResume = async (resumeId: string, fileName: string): Promise<void> => {
+    try {
+      await openAuthenticatedFile(resumeService.recruiterFileUrl(resumeId));
+    } catch (err) {
+      showToast(err instanceof Error ? err.message : `Unable to open ${fileName}.`, "error");
     }
   };
 
@@ -259,15 +269,14 @@ export function ApplicationDetails(): JSX.Element {
             <Card>
               <CardHeader title="Resume" />
               <CardContent>
-                <a
-                  href={resolveFileUrl(application.resume.fileUrl)}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="focus-ring flex items-center gap-2 rounded-md border border-surface-border p-3 text-sm text-navy-700 hover:bg-surface-muted"
+                <button
+                  type="button"
+                  onClick={() => void handleOpenResume(application.resume!.id, application.resume!.fileName)}
+                  className="focus-ring flex w-full items-center gap-2 rounded-md border border-surface-border p-3 text-left text-sm text-navy-700 hover:bg-surface-muted"
                 >
                   <FileText className="h-4 w-4 text-navy-400" />
                   {application.resume.fileName}
-                </a>
+                </button>
               </CardContent>
             </Card>
           )}

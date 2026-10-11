@@ -69,7 +69,7 @@ export function Analytics(): JSX.Element {
 
   return (
     <AppShell title="Analytics">
-      <PageHeader title="Platform Analytics" description="How healthy is the HireVora platform?" />
+      <PageHeader title="Platform Analytics" description="How healthy is the Hirevora platform?" />
 
       {error ? (
         <ErrorState description={error} onRetry={refetch} />

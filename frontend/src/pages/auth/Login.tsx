@@ -9,7 +9,7 @@ import { Button } from "../../components/ui/Button.js";
 import { useAuth } from "../../context/AuthContext.js";
 import { ROLE_HOME_PATH } from "../../navigation/navConfig.js";
 import type { ApiResponse } from "../../types/index.js";
-import HireVoraLogo from "../../components/brand/HireVoraLogo";
+import { HirevoraLogo } from "../../components/brand/HirevoraLogo.js";
 
 const loginSchema = z.object({
   email: z.string().email("Enter a valid email address"),
@@ -54,8 +54,8 @@ export function Login(): JSX.Element {
     <div className="flex min-h-screen items-center justify-center bg-surface px-4 py-12">
       <div className="w-full max-w-sm">
         <div className="mb-8 flex flex-col items-center gap-2">
-          <HireVoraLogo variant="mark" />
-          <span className="text-lg font-semibold text-navy-900">HireVora</span>
+          <HirevoraLogo variant="mark" />
+          <span className="text-lg font-semibold text-navy-900">Hirevora</span>
         </div>
 
         <div className="rounded-lg border border-surface-border bg-surface-card p-6 shadow-card">

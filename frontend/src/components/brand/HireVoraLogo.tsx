@@ -1,6 +1,6 @@
 import { cn } from "../../lib/cn.js";
 
-export interface HireVoraLogoProps {
+export interface HirevoraLogoProps {
   /** "full" = mark + wordmark, "mark" = icon only, "compact" = smaller icon for tight spaces (mobile topbar). */
   variant?: "full" | "mark" | "compact";
   /** "color" for light backgrounds (navy + accent), "reversed" for dark surfaces (white + accent), "mono" for a single flat color (e.g. printed materials). */
@@ -9,7 +9,7 @@ export interface HireVoraLogoProps {
 }
 
 /**
- * HireVora mark (v3): two solid rounded panels — one representing the
+ * Hirevora mark (v3): two solid rounded panels — one representing the
  * candidate, one the recruiter — offset so they overlap, with the overlap
  * itself picked out in the accent color as the "match" between them. No
  * letterform, no chain/handshake/spark/people pictogram: just two flat
@@ -18,8 +18,8 @@ export interface HireVoraLogoProps {
  * monochrome with no loss of meaning.
  */
 function Mark({ size, tone }: { size: number; tone: "color" | "reversed" | "mono" }): JSX.Element {
-  const panelColor = tone === "reversed" ? "#ffffff" : "#111729";
-  const overlapColor = tone === "mono" ? panelColor : "#4f46e5";
+  const panelColor = tone === "reversed" ? "#ffffff" : "#111729"; // white on dark / navy-900 on light
+  const overlapColor = tone === "mono" ? panelColor : "#4f46e5"; // accent-600, or same as panels in mono mode
   const panelOpacity = tone === "mono" ? 0.85 : 1;
 
   return (
@@ -30,20 +30,23 @@ function Mark({ size, tone }: { size: number; tone: "color" | "reversed" | "mono
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       role="img"
-      aria-label="HireVora"
+      aria-label="Hirevora"
     >
+      {/* Panel A — candidate */}
       <rect x="5" y="5" width="20" height="20" rx="5" fill={panelColor} opacity={panelOpacity} />
+      {/* Panel B — recruiter */}
       <rect x="15" y="15" width="20" height="20" rx="5" fill={panelColor} opacity={panelOpacity} />
+      {/* The match: where the two overlap */}
       <rect x="16.5" y="16.5" width="7" height="7" rx="1.75" fill={overlapColor} />
     </svg>
   );
 }
 
-export function HireVoraLogo({
+export function HirevoraLogo({
   variant = "full",
   tone = "color",
   className,
-}: HireVoraLogoProps): JSX.Element {
+}: HirevoraLogoProps): JSX.Element {
   const size = variant === "compact" ? 24 : 32;
   const textColor = tone === "reversed" ? "text-white" : "text-navy-900";
 
@@ -58,9 +61,9 @@ export function HireVoraLogo({
   return (
     <span className={cn("inline-flex items-center gap-2", className)}>
       <Mark size={size} tone={tone} />
-      <span className={cn("text-base font-semibold tracking-tight", textColor)}>HireVora</span>
+      <span className={cn("text-base font-semibold tracking-tight", textColor)}>Hirevora</span>
     </span>
   );
 }
 
-export default HireVoraLogo;
+export default HirevoraLogo;

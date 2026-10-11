@@ -7,7 +7,10 @@ import { StatusBadge } from "../../components/ui/StatusBadge.js";
 import { LoadingSpinner } from "../../components/ui/LoadingSpinner.js";
 import { ErrorState } from "../../components/ui/ErrorState.js";
 import { Button } from "../../components/ui/Button.js";
-import { formatDate, formatDateTime, resolveFileUrl } from "../../lib/format.js";
+import { formatDate, formatDateTime } from "../../lib/format.js";
+import { openAuthenticatedFile } from "../../lib/fileAccess.js";
+import { resumeService } from "../../services/resumeService.js";
+import { useToast } from "../../context/ToastContext.js";
 import { useApplicationDetails } from "../../hooks/useApplicationDetails.js";
 import { cn } from "../../lib/cn.js";
 import type { ApplicationStatus } from "../../types/index.js";
@@ -24,6 +27,15 @@ const STATUS_ORDER: ApplicationStatus[] = [
 export function ApplicationDetails(): JSX.Element {
   const { applicationId } = useParams<{ applicationId: string }>();
   const { data: application, isLoading, error, refetch } = useApplicationDetails(applicationId);
+  const { showToast } = useToast();
+
+  const handleOpenResume = async (resumeId: string, fileName: string): Promise<void> => {
+    try {
+      await openAuthenticatedFile(resumeService.ownFileUrl(resumeId));
+    } catch (err) {
+      showToast(err instanceof Error ? err.message : `Unable to open ${fileName}.`, "error");
+    }
+  };
 
   if (isLoading) {
     return (
@@ -158,15 +170,14 @@ export function ApplicationDetails(): JSX.Element {
             <Card>
               <CardHeader title="Submitted resume" />
               <CardContent>
-                <a
-                  href={resolveFileUrl(application.resume.fileUrl)}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="focus-ring flex items-center gap-2 rounded-md border border-surface-border p-3 text-sm text-navy-700 hover:bg-surface-muted"
+                <button
+                  type="button"
+                  onClick={() => void handleOpenResume(application.resume!.id, application.resume!.fileName)}
+                  className="focus-ring flex w-full items-center gap-2 rounded-md border border-surface-border p-3 text-left text-sm text-navy-700 hover:bg-surface-muted"
                 >
                   <FileText className="h-4 w-4 text-navy-400" />
                   {application.resume.fileName}
-                </a>
+                </button>
               </CardContent>
             </Card>
           )}

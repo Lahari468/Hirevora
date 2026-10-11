@@ -9,7 +9,9 @@ import { ErrorState } from "../../components/ui/ErrorState.js";
 import { EmptyState } from "../../components/ui/EmptyState.js";
 import { useResumes } from "../../hooks/useResumes.js";
 import { useToast } from "../../context/ToastContext.js";
-import { formatDate, resolveFileUrl } from "../../lib/format.js";
+import { formatDate } from "../../lib/format.js";
+import { openAuthenticatedFile } from "../../lib/fileAccess.js";
+import { resumeService } from "../../services/resumeService.js";
 import type { ApiResponse } from "../../types/index.js";
 
 const ACCEPTED_TYPES = ".pdf,.doc,.docx";
@@ -42,6 +44,14 @@ export function ResumePage(): JSX.Element {
       showToast("Resume uploaded", "success");
     } catch (err) {
       setUploadError(isApiResponse(err) ? err.message : "Unable to upload resume.");
+    }
+  };
+
+  const handleDownload = async (id: string, fileName: string): Promise<void> => {
+    try {
+      await openAuthenticatedFile(resumeService.ownFileUrl(id));
+    } catch (err) {
+      showToast(err instanceof Error ? err.message : `Unable to open ${fileName}.`, "error");
     }
   };
 
@@ -101,7 +111,7 @@ export function ResumePage(): JSX.Element {
             <EmptyState
               icon={<FileText className="h-5 w-5" />}
               title="No resumes uploaded"
-              description="Upload a resume to start applying to jobs on HireVora."
+              description="Upload a resume to start applying to jobs on Hirevora."
             />
           ) : (
             <ul className="divide-y divide-surface-border">
@@ -114,15 +124,14 @@ export function ResumePage(): JSX.Element {
                     <p className="truncate text-sm font-medium text-navy-800">{resume.fileName}</p>
                     <p className="text-xs text-navy-500">Uploaded {formatDate(resume.createdAt)}</p>
                   </div>
-                  <a
-                    href={resolveFileUrl(resume.fileUrl)}
-                    target="_blank"
-                    rel="noreferrer"
+                  <button
+                    type="button"
+                    onClick={() => void handleDownload(resume.id, resume.fileName)}
                     aria-label={`Download ${resume.fileName}`}
                     className="focus-ring rounded-md p-2 text-navy-400 hover:bg-surface-muted hover:text-navy-600"
                   >
                     <Download className="h-4 w-4" />
-                  </a>
+                  </button>
                   <button
                     type="button"
                     onClick={() => void handleRemove(resume.id)}

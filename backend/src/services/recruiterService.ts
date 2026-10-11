@@ -1,8 +1,6 @@
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "../utils/prismaClient.js";
 import { NotFoundError } from "../types/index.js";
 import { UpdateRecruiterProfileRequest } from "../validators/recruiterValidator.js";
-
-const prisma = new PrismaClient();
 
 interface RecruiterProfileData {
   id: string;

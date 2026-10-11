@@ -2,7 +2,13 @@ import type { EmploymentType } from "../types/index.js";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
-/** Resumes are returned with a relative fileUrl (e.g. "/uploads/resumes/x.pdf") served by the backend, not the frontend dev server. */
+/**
+ * Resolves a relative URL against the backend's origin (e.g. a company
+ * logoUrl or a job posting's external link), not the frontend dev server.
+ * Resume files no longer go through this — they're private and require
+ * authentication, so they're fetched via openAuthenticatedFile()
+ * (lib/fileAccess.ts) instead of a plain resolved href.
+ */
 export function resolveFileUrl(fileUrl: string): string {
   if (/^https?:\/\//.test(fileUrl)) return fileUrl;
   return `${API_URL}${fileUrl}`;

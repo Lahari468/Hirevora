@@ -59,7 +59,7 @@ export function FindJobs(): JSX.Element {
 
   return (
     <AppShell title="Find Jobs">
-      <PageHeader title="Find your next opportunity" description="Search open roles on HireVora." />
+      <PageHeader title="Find your next opportunity" description="Search open roles on Hirevora." />
 
       <form
         onSubmit={handleSearchSubmit}

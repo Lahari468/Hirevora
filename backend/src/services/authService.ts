@@ -1,4 +1,5 @@
-import { PrismaClient, UserRole } from "@prisma/client";
+import { UserRole } from "@prisma/client";
+import { prisma } from "../utils/prismaClient.js";
 import { hashPassword, verifyPassword } from "../utils/password.js";
 import { generateAccessToken, generateRefreshToken } from "../utils/jwt.js";
 import {
@@ -11,9 +12,6 @@ import type {
   RecruiterRegisterRequest,
   CandidateRegisterRequest,
 } from "../validators/authValidator.js";
-
-const prisma = new PrismaClient();
-
 
 interface LoginData {
   email: string;

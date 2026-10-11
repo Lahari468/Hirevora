@@ -1,8 +1,6 @@
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "../utils/prismaClient.js";
 import { NotFoundError } from "../types/index.js";
 import { CreateCompanyRequest, UpdateCompanyRequest } from "../validators/companyValidator.js";
-
-const prisma = new PrismaClient();
 
 interface CompanyData {
   id: string;
